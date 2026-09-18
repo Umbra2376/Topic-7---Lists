@@ -153,6 +153,7 @@ namespace Menu_Loop
                     vegetables.Add("PEAS");
                     while (task2 == false)
                     {
+                        Console.Clear();
                         for (int i = 0; i < vegetables.Count; i++)
                         {
                             Console.WriteLine(i + ". " + vegetables[i]);
@@ -162,7 +163,9 @@ namespace Menu_Loop
                         Console.WriteLine("2 - Remove a vegetable by it's name");
                         Console.WriteLine("3 - Search a vegetable's index");
                         Console.WriteLine("4 - Add a vegetable to the list");
-                        Console.WriteLine("5 - Quit");
+                        Console.WriteLine("5 - Sort this list");
+                        Console.WriteLine("6 - Clear the list");
+                        Console.WriteLine("7 - Quit");
                         string option = Console.ReadLine();
                         if (!int.TryParse(option, out task2Choice))
                         {
@@ -173,7 +176,7 @@ namespace Menu_Loop
                         else if (task2Choice == 1)
                         {
                             Console.WriteLine("PLease type the index of the vegetable you would like to remove");
-                            while (!int.TryParse(Console.ReadLine(), out index) && index > vegetables.Count && index < 0)
+                            while (!int.TryParse(Console.ReadLine(), out index) || index > (vegetables.Count -1) || index < 0)
                                 Console.WriteLine("Please enter a valid number!");
                             vegetables.RemoveAt((int)index);
                         }
@@ -203,14 +206,31 @@ namespace Menu_Loop
                                 Console.WriteLine("Could not find this vegetable.");
                             }
                         }
+                        else if (task2Choice == 4)
+                        {
+                            Console.WriteLine("Please enter a vegetable that you would like to add to the list");
+                            string addition = Console.ReadLine().ToUpper();
+                            while (int.TryParse(addition, out _) && vegetables.Contains(addition))
+                                Console.WriteLine("This is invalid");
+                            Console.WriteLine($"{addition} has been added to the list.");
+                        }
                         else if (task2Choice == 5)
+                        {
+                            vegetables.Sort();
+                            Console.WriteLine("The list has been sorted.");
+                        }
+                        else if (task2Choice == 6)
+                        {
+                            vegetables.Clear();
+                            Console.WriteLine("The list has been cleared.");
+                        }
+                        else if (task2Choice == 7)
                         {
                             task2 = true;
                         }
                         else
                         {
-                            Console.WriteLine("Invalid choice, press ENTER to continue.");
-                            Console.ReadLine();
+                            Console.WriteLine("Invalid choice.");
                         }
                         Console.WriteLine("Hit ENTER to continue.");
                         Console.ReadLine();
