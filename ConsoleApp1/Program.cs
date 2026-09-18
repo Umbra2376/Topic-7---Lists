@@ -182,7 +182,10 @@ namespace Menu_Loop
                             Console.WriteLine("Please type the name of the vegetable you would like to remove");
                             string name = Console.ReadLine().ToUpper();
                             if (vegetables.Contains(name))
+                            {
                                 vegetables.Remove(name);
+                                Console.WriteLine("I have removed " + name + " from the list.");
+                            }
                             else
                                 Console.WriteLine("The list doesn't contain this vegetable.");
                         }
@@ -192,7 +195,12 @@ namespace Menu_Loop
                             string search = Console.ReadLine().ToUpper();
                             if (vegetables.Contains(search))
                             {
-
+                                int searchIndex = vegetables.BinarySearch(search);
+                                Console.WriteLine($"The index of {search} is {searchIndex}.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Could not find this vegetable.");
                             }
                         }
                         else if (task2Choice == 5)
